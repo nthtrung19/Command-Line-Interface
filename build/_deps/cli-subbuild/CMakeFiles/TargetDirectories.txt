@@ -1,0 +1,3 @@
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/CMakeFiles/cli-populate.dir
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/CMakeFiles/edit_cache.dir
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/CMakeFiles/rebuild_cache.dir

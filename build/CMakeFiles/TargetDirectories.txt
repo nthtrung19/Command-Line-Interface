@@ -1,0 +1,13 @@
+/home/thanhtrung/CLI/my_cli/build/CMakeFiles/my_cli.dir
+/home/thanhtrung/CLI/my_cli/build/CMakeFiles/edit_cache.dir
+/home/thanhtrung/CLI/my_cli/build/CMakeFiles/rebuild_cache.dir
+/home/thanhtrung/CLI/my_cli/build/CMakeFiles/list_install_components.dir
+/home/thanhtrung/CLI/my_cli/build/CMakeFiles/install.dir
+/home/thanhtrung/CLI/my_cli/build/CMakeFiles/install/local.dir
+/home/thanhtrung/CLI/my_cli/build/CMakeFiles/install/strip.dir
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-build/CMakeFiles/edit_cache.dir
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-build/CMakeFiles/rebuild_cache.dir
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-build/CMakeFiles/list_install_components.dir
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-build/CMakeFiles/install.dir
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-build/CMakeFiles/install/local.dir
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-build/CMakeFiles/install/strip.dir

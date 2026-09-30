@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/CMakeFiles/cli-populate"
+		},
+		{
+			"file" : "/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/CMakeFiles/cli-populate.rule"
+		},
+		{
+			"file" : "/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/CMakeFiles/cli-populate-complete.rule"
+		},
+		{
+			"file" : "/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/cli-populate-prefix/src/cli-populate-stamp/cli-populate-build.rule"
+		},
+		{
+			"file" : "/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/cli-populate-prefix/src/cli-populate-stamp/cli-populate-configure.rule"
+		},
+		{
+			"file" : "/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/cli-populate-prefix/src/cli-populate-stamp/cli-populate-download.rule"
+		},
+		{
+			"file" : "/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/cli-populate-prefix/src/cli-populate-stamp/cli-populate-install.rule"
+		},
+		{
+			"file" : "/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/cli-populate-prefix/src/cli-populate-stamp/cli-populate-mkdir.rule"
+		},
+		{
+			"file" : "/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/cli-populate-prefix/src/cli-populate-stamp/cli-populate-patch.rule"
+		},
+		{
+			"file" : "/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/cli-populate-prefix/src/cli-populate-stamp/cli-populate-test.rule"
+		},
+		{
+			"file" : "/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/cli-populate-prefix/src/cli-populate-stamp/cli-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"cli-populate"
+		],
+		"name" : "cli-populate"
+	}
+}

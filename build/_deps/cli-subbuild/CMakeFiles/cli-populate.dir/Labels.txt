@@ -1,0 +1,14 @@
+# Target labels
+ cli-populate
+# Source files and their labels
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/CMakeFiles/cli-populate
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/CMakeFiles/cli-populate.rule
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/CMakeFiles/cli-populate-complete.rule
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/cli-populate-prefix/src/cli-populate-stamp/cli-populate-build.rule
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/cli-populate-prefix/src/cli-populate-stamp/cli-populate-configure.rule
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/cli-populate-prefix/src/cli-populate-stamp/cli-populate-download.rule
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/cli-populate-prefix/src/cli-populate-stamp/cli-populate-install.rule
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/cli-populate-prefix/src/cli-populate-stamp/cli-populate-mkdir.rule
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/cli-populate-prefix/src/cli-populate-stamp/cli-populate-patch.rule
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/cli-populate-prefix/src/cli-populate-stamp/cli-populate-test.rule
+/home/thanhtrung/CLI/my_cli/build/_deps/cli-subbuild/cli-populate-prefix/src/cli-populate-stamp/cli-populate-update.rule
