@@ -288,6 +288,12 @@ GIT_EXECUTABLE:FILEPATH=/usr/bin/git
 //Installation directory for pkg-config (cli.pc) file
 PKGCONFIG_INSTALL_DIR:PATH=share/pkgconfig
 
+//Arguments to supply to pkg-config
+PKG_CONFIG_ARGN:STRING=
+
+//pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
+
 //Value Computed by CMake
 cli_BINARY_DIR:STATIC=/home/thanhtrung/CLI/my_cli/build/_deps/cli-build
 
@@ -305,6 +311,9 @@ my_cli_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 my_cli_SOURCE_DIR:STATIC=/home/thanhtrung/CLI/my_cli
+
+//Path to a library.
+pkgcfg_lib_ZMQ_zmq:FILEPATH=/usr/lib/x86_64-linux-gnu/libzmq.so
 
 
 ########################
@@ -474,10 +483,56 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Details about finding PkgConfig
+FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.29.2()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //ADVANCED property for variable: GIT_EXECUTABLE
 GIT_EXECUTABLE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PKG_CONFIG_ARGN
+PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
+PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
+ZMQ_CFLAGS:INTERNAL=-isystem;/usr/include/mit-krb5;-I/usr/include/pgm-5.3;-I/usr/include/libxml2
+ZMQ_CFLAGS_I:INTERNAL=
+ZMQ_CFLAGS_OTHER:INTERNAL=
+ZMQ_FOUND:INTERNAL=1
+ZMQ_INCLUDEDIR:INTERNAL=/usr/include
+ZMQ_INCLUDE_DIRS:INTERNAL=/usr/include/mit-krb5;/usr/include/pgm-5.3;/usr/include/libxml2
+ZMQ_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lzmq
+ZMQ_LDFLAGS_OTHER:INTERNAL=
+ZMQ_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
+ZMQ_LIBRARIES:INTERNAL=zmq
+ZMQ_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+ZMQ_LIBS:INTERNAL=
+ZMQ_LIBS_L:INTERNAL=
+ZMQ_LIBS_OTHER:INTERNAL=
+ZMQ_LIBS_PATHS:INTERNAL=
+ZMQ_MODULE_NAME:INTERNAL=libzmq
+ZMQ_PREFIX:INTERNAL=/usr
+ZMQ_STATIC_CFLAGS:INTERNAL=-isystem;/usr/include/mit-krb5;-I/usr/include/pgm-5.3;-I/usr/include/libxml2
+ZMQ_STATIC_CFLAGS_I:INTERNAL=
+ZMQ_STATIC_CFLAGS_OTHER:INTERNAL=
+ZMQ_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/mit-krb5;/usr/include/pgm-5.3;/usr/include/libxml2
+ZMQ_STATIC_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-L/usr/lib/x86_64-linux-gnu/mit-krb5;-L/usr/lib/x86_64-linux-gnu;-lzmq;-lstdc++;-lpthread;-lrt;-lgssapi_krb5;-lkrb5;-lk5crypto;-lcom_err;-lkrb5support;-lsodium;-pthread;-lpgm;-lpthread;-lm;-lnorm;libprotokit.a;-lxml2;-licui18n;-licuuc;-licudata;-lz;-llzma;-lm;-lbsd;-lmd
+ZMQ_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread;libprotokit.a
+ZMQ_STATIC_LIBDIR:INTERNAL=
+ZMQ_STATIC_LIBRARIES:INTERNAL=zmq;stdc++;pthread;rt;gssapi_krb5;krb5;k5crypto;com_err;krb5support;sodium;pgm;pthread;m;norm;xml2;icui18n;icuuc;icudata;z;lzma;m;bsd;md
+ZMQ_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu;/usr/lib/x86_64-linux-gnu/mit-krb5;/usr/lib/x86_64-linux-gnu
+ZMQ_STATIC_LIBS:INTERNAL=
+ZMQ_STATIC_LIBS_L:INTERNAL=
+ZMQ_STATIC_LIBS_OTHER:INTERNAL=
+ZMQ_STATIC_LIBS_PATHS:INTERNAL=
+ZMQ_VERSION:INTERNAL=4.3.4
+ZMQ_libzmq_INCLUDEDIR:INTERNAL=
+ZMQ_libzmq_LIBDIR:INTERNAL=
+ZMQ_libzmq_PREFIX:INTERNAL=
+ZMQ_libzmq_VERSION:INTERNAL=
 //CMAKE_INSTALL_PREFIX during last run
 _GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=/usr/local
+__pkg_config_arguments_ZMQ:INTERNAL=REQUIRED;IMPORTED_TARGET;libzmq
+__pkg_config_checked_ZMQ:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_ZMQ_zmq
+pkgcfg_lib_ZMQ_zmq-ADVANCED:INTERNAL=1
+prefix_result:INTERNAL=/usr/lib/x86_64-linux-gnu
 

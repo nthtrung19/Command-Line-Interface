@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/thanhtrung/CLI/my_cli/build/_deps/cli-src/include
+CXX_INCLUDES = -I/home/thanhtrung/CLI/my_cli/build/_deps/cli-src/include -isystem /usr/include/mit-krb5 -isystem /usr/include/pgm-5.3 -isystem /usr/include/libxml2
 
 CXX_FLAGS = -std=gnu++17
 

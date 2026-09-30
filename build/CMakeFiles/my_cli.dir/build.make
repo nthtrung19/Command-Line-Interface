@@ -92,6 +92,7 @@ my_cli_EXTERNAL_OBJECTS =
 
 my_cli: CMakeFiles/my_cli.dir/src/main.cpp.o
 my_cli: CMakeFiles/my_cli.dir/build.make
+my_cli: /usr/lib/x86_64-linux-gnu/libzmq.so
 my_cli: CMakeFiles/my_cli.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/thanhtrung/CLI/my_cli/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable my_cli"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/my_cli.dir/link.txt --verbose=$(VERBOSE)

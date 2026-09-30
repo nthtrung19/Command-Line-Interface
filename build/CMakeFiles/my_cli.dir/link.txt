@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/my_cli.dir/src/main.cpp.o -o my_cli 
+/usr/bin/c++ CMakeFiles/my_cli.dir/src/main.cpp.o -o my_cli  /usr/lib/x86_64-linux-gnu/libzmq.so 
