@@ -1,10 +1,10 @@
 // ares-cli: console (daniele77/cli) -> Dictionary -> Dispatcher -> target adapter.
 //
-// Only the "ares" target / "set_state" command is wired up right now, using
-// values confirmed from Ares's real source (see dictionary.hpp for the
-// exact citations). Adding a second command or target later means adding
-// entries to Dictionary and, if needed, a new adapter -- nothing here
-// changes.
+// main.cpp is intentionally generic: it knows nothing about "ares" or "fsw"
+// specifically. It reads TargetDef entries from the Dictionary and builds
+// each adapter through the factory registry below. Adding a new target means
+// adding one TargetDef (dictionary.hpp) and one factory entry (this file's
+// buildAdapterFactories()) -- no other code changes.
 #include "ares_adapter.hpp"
 #include "dictionary.hpp"
 #include "dispatcher.hpp"
@@ -18,8 +18,10 @@
 
 #include <cstdio>
 #include <fstream>
+#include <functional>
 #include <iomanip>
 #include <iostream>
+#include <map>
 #include <memory>
 #include <sstream>
 #include <string>
@@ -35,47 +37,117 @@ std::string toHex(const std::vector<std::uint8_t>& bytes)
         s << (i ? " " : "") << std::setw(2) << static_cast<int>(bytes[i]);
     return s.str();
 }
+
+// One factory per adapter type. Each factory only needs to know the
+// connection keys its own adapter requires -- it never sees any other
+// target's configuration.
+using AdapterFactory = std::function<std::unique_ptr<ITargetAdapter>(const ConnectionConfig&)>;
+
+std::map<std::string, AdapterFactory> buildAdapterFactories()
+{
+    return {
+        {"zmq",
+         [](const ConnectionConfig& cfg) -> std::unique_ptr<ITargetAdapter>
+         {
+             return std::make_unique<AresAdapter>(cfg.at("endpoint"));
+         }},
+        // {"udp",
+        //  [](const ConnectionConfig& cfg) -> std::unique_ptr<ITargetAdapter>
+        //  {
+        //      return std::make_unique<FswAdapter>(cfg.at("ip"), cfg.at("port"));
+        //  }},
+    };
+}
+
+// Parses "--set target.key=value" overrides, e.g. "--set ares.endpoint=tcp://...".
+// Generic across every target; never hardcodes a target name.
+bool applyOverride(std::map<std::string, TargetDef>& targets, const std::string& spec,
+                   std::string& error)
+{
+    const auto dot = spec.find('.');
+    const auto eq = spec.find('=');
+    if (dot == std::string::npos || eq == std::string::npos || eq < dot)
+    {
+        error = "expected --set <target>.<key>=<value>, got: " + spec;
+        return false;
+    }
+    const std::string target = spec.substr(0, dot);
+    const std::string key = spec.substr(dot + 1, eq - dot - 1);
+    const std::string value = spec.substr(eq + 1);
+
+    const auto it = targets.find(target);
+    if (it == targets.end())
+    {
+        error = "unknown target in --set: " + target;
+        return false;
+    }
+    it->second.connection[key] = value;
+    return true;
+}
 }  // namespace
 
 int main(int argc, char** argv)
 {
     std::string scriptPath;
-    std::string endpoint = "tcp://127.0.0.1:5556";
     bool dryRun = false;
+    std::vector<std::string> overrides;
 
     for (int i = 1; i < argc; ++i)
     {
         const std::string arg = argv[i];
         if (arg == "--script" && i + 1 < argc) scriptPath = argv[++i];
-        else if (arg == "--endpoint" && i + 1 < argc) endpoint = argv[++i];
+        else if (arg == "--set" && i + 1 < argc) overrides.push_back(argv[++i]);
         else if (arg == "--dry-run") dryRun = true;
         else
         {
-            std::cerr << "usage: ares_cli [--script FILE] [--endpoint EP] [--dry-run]\n";
+            std::cerr << "usage: ares_cli [--script FILE] [--set target.key=value]... [--dry-run]\n";
             return 2;
         }
     }
 
     Dictionary dictionary;
+    auto targets = dictionary.targets();   // mutable copy: overrides apply here, not to Dictionary itself
+
+    for (const auto& spec : overrides)
+    {
+        std::string error;
+        if (!applyOverride(targets, spec, error))
+        {
+            std::cerr << "error: " << error << "\n";
+            return 2;
+        }
+    }
+
+    const auto factories = buildAdapterFactories();
+
     Dispatcher dispatcher;
     dispatcher.setDryRun(dryRun);
-    dispatcher.registerAdapter("ares", std::make_unique<AresAdapter>(endpoint));
 
     int failureCount = 0;
 
-    // Build one cli::Menu submenu per target, and one command per dictionary entry.
     auto root = std::make_unique<cli::Menu>("ares-cli");
 
-    for (const auto& targetEntry : dictionary.targets())
+    for (const auto& targetEntry : targets)
     {
-        auto submenu = std::make_unique<cli::Menu>(targetEntry.first);
+        const TargetDef& targetDef = targetEntry.second;
 
-        for (const auto& commandDef : targetEntry.second.commands)
+        const auto factoryIt = factories.find(targetDef.adapterType);
+        if (factoryIt == factories.end())
+        {
+            std::cerr << "warning: no adapter factory for type '" << targetDef.adapterType
+                      << "' (target '" << targetDef.name << "' skipped)\n";
+            continue;
+        }
+        dispatcher.registerAdapter(targetDef.name, factoryIt->second(targetDef.connection));
+
+        auto submenu = std::make_unique<cli::Menu>(targetDef.name);
+
+        for (const auto& commandDef : targetDef.commands)
         {
             std::vector<std::string> paramNames;
             for (const auto& param : commandDef.params) paramNames.push_back(param.name);
 
-            const std::string targetName = targetEntry.first;
+            const std::string targetName = targetDef.name;
             const std::string commandName = commandDef.name;
 
             submenu->Insert(

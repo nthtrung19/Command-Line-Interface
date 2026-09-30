@@ -35,9 +35,17 @@ struct CommandDef
     std::vector<ParamDef> params;   // first param is always device_id, by convention (see AresAdapter)
 };
 
+// Free-form key/value connection settings for one target. Each target
+// defines whatever keys its adapter actually needs -- e.g. ZMQ only needs
+// "endpoint", a future UDP-based target might need "ip" and "port". main.cpp
+// never reads these keys directly; only the matching adapter factory does.
+using ConnectionConfig = std::map<std::string, std::string>;
+
 struct TargetDef
 {
     std::string name;
+    std::string adapterType;     // key into the adapter factory registry, e.g. "zmq"
+    ConnectionConfig connection;
     std::vector<CommandDef> commands;
 };
 
@@ -48,6 +56,8 @@ public:
     {
         targets_["ares"] = TargetDef{
             "ares",
+            "zmq",                                      // -> looked up in the adapter factory registry
+            {{"endpoint", "tcp://127.0.0.1:5556"}},      // -> AresAdapter's only required key
             {
                 CommandDef{
                     "set_state",
@@ -59,8 +69,23 @@ public:
                         {"mode", 0, 4},   // OperatingMode enum range, confirmed in rwl_model.hpp
                     },
                 },
+
+                CommandDef{
+                    "set_error",
+                    2,   // RwlMasterCommand::SET_ERROR_CMD, confirmed in rwl_model.cpp
+                    "Set ReactionWheel error state",
+                    {
+                        {"device_id", 0, 65535},
+                        {"error", 0, 255},   // ErrorState enum range, confirmed in rwl_model.hpp
+                    },
+                },
             },
         };
+
+        // Adding a second target (e.g. "fsw") means adding a TargetDef here
+        // and a matching entry in the adapter factory registry in main.cpp --
+        // nothing else in this file, or in main.cpp's command-handling code,
+        // needs to change.
     }
 
     const std::map<std::string, TargetDef>& targets() const { return targets_; }
